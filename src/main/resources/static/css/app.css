@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/*!
+ * Application css
+ */
+.no-a-cls{
+   color: #FFFFFF;
+   text-decoration: none;
+}
+.test-cls{
+    color: red;
+}
+.body-th{
+    background-image: url('/images/logo.jpg');
+}
+.app-img-cls{
+    height: 35px;
+    width: 130px;
+}
