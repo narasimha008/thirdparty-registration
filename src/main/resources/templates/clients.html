@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link rel="icon" href="/images/logo.jpg">
+    <link href="/css/bootstrap.min.css"
+          rel="stylesheet"
+          crossorigin="anonymous">
+    <link href="/css/app.css"
+          rel="stylesheet"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="/images/logo.jpg" class="rounded app-img-cls" alt="Cinque Terre">Registration
+            and Login System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="col-md-4" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/client-register}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/clients}">Clients</a>
+                </li>
+            </ul>
+        </div>
+        <div class="offset-md-3"></div>
+        <div class="col-md-3" id="navbarSupportedContentLogout">
+            <div class="row navbar-brand">
+                <div class="col-md-6">
+                    Welcome, <span th:text="${#authentication.getPrincipal().getFirstName()}"></span> <span
+                        th:text="${#authentication.getPrincipal().getLastName()}"></span>
+                </div>
+                <div class="col-md-3">
+                    <a class="no-a-cls" aria-current="page" th:href="@{/logout}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <h1> Registered Users </h1>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>Company Name</th>
+            <th>App Name</th>
+            <th>Technical contact</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client: ${clients}">
+            <td><a th:href="@{/client-info?clientId={id}(id=${client.id})}" th:text="${client.name}"></a></td>
+            <td><a th:href="@{/client-info?clientId={id}(id=${client.id})}" th:text="${client.appName}"></a></td>
+            <td th:text="${client.appContact}"></td>
+            <td th:text="${client.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

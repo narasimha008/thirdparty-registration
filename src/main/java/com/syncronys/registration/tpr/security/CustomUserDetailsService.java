@@ -29,9 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        String ssn = request.getParameter("ssn");
-        User user = userRepository.findByUserNameAndSsn(userName, ssn);
+        User user = userRepository.findByUserName(userName);
         if (user != null) {
             AuthUser authUser = new AuthUser(user.getUserName(),
                     user.getPassword(),
@@ -39,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             BeanUtils.copyProperties(user, authUser);
             return authUser;
         } else {
-            throw new UsernameNotFoundException("Invalid username or password or ssn.");
+            throw new UsernameNotFoundException("Invalid username or password.");
         }
     }
 

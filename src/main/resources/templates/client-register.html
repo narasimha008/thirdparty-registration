@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link rel="icon" href="/images/logo.jpg">
+    <link href="/css/bootstrap.min.css" rel="stylesheet"
+          crossorigin="anonymous">
+    <link href="/css/app.css"
+          rel="stylesheet"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:fragment="header">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}"><img src="/images/logo.jpg" class="rounded app-img-cls" alt="Cinque Terre">Registration and Login System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div th:if="${param.success}">
+                <div class="alert alert-success">You've successfully registered
+                    to our app!
+                </div>
+            </div>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger" th:text="${param.error}">
+                </div>
+            </div>
+            <div class="card-header">
+                <h2 class="text-center">Client Registration</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" role="form" th:action="@{/client/save}" th:object="${client}">
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Name of Company</label>
+                        <input class="form-control"
+                               id="name"
+                               name="name"
+                               placeholder="Enter Company Name"
+                               th:field="*{name}"
+                               type="text"
+                        />
+                        <p th:errors="*{name}" class="text-danger"
+                           th:if="${#fields.hasErrors('name')}">
+                        </p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Company identity validation o Company contact (name, email, phone#, etc.)</label>
+                        <input class="form-control"
+                               id="info"
+                               name="info"
+                               placeholder="Enter Company Info"
+                               th:field="*{info}"
+                               type="text"
+                        />
+                        <p th:errors="*{info}" class="text-danger"
+                           th:if="${#fields.hasErrors('info')}">
+                        </p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Name of Application</label>
+                        <input class="form-control"
+                                  id="appName"
+                                  name="appName"
+                                  placeholder="Enter Name of Application"
+                                  th:field="*{appName}"
+                        ></input>
+                        <p th:errors="*{appName}" class="text-danger"
+                           th:if="${#fields.hasErrors('appName')}">
+                        </p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Description of application and why they want access</label>
+                        <input class="form-control"
+                               id="appDesc"
+                               name="appDesc"
+                               placeholder="Enter city"
+                               th:field="*{appDesc}"
+                               type="text"
+                        />
+                        <p th:errors="*{appDesc}" class="text-danger"
+                           th:if="${#fields.hasErrors('appDesc')}">
+                        </p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Description of user authentication</label>
+                        <input class="form-control"
+                               id="userAuthDesc"
+                               name="userAuthDesc"
+                               placeholder="Enter Description of user authentication"
+                               th:field="*{userAuthDesc}"
+                               type="text"
+                        />
+                        <p th:errors="*{userAuthDesc}" class="text-danger"
+                           th:if="${#fields.hasErrors('userAuthDesc')}">
+                        </p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Description of data handling/security/privacy</label>
+                        <input class="form-control"
+                               id="dataDesc"
+                               name="dataDesc"
+                               placeholder="Enter Description of data"
+                               th:field="*{dataDesc}"
+                               type="text"
+                        />
+                        <p th:errors="*{dataDesc}" class="text-danger"
+                           th:if="${#fields.hasErrors('dataDesc')}">
+                        </p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Web link to application in a test environment</label>
+                        <input class="form-control"
+                               id="appLink"
+                               name="appLink"
+                               placeholder="Enter Web link to application"
+                               th:field="*{appLink}"
+                               type="text"
+                        />
+                        <p th:errors="*{appLink}" class="text-danger"
+                           th:if="${#fields.hasErrors('appLink')}">
+                        </p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Technical contact for testing their application with our FHIR API</label>
+                        <input class="form-control"
+                               id="appContact"
+                               name="appContact"
+                               placeholder="Enter Technical contact for testing"
+                               th:field="*{appContact}"
+                               type="text"
+                        />
+                        <p th:errors="*{appContact}" class="text-danger"
+                           th:if="${#fields.hasErrors('appContact')}">
+                        </p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <button class="btn btn-primary" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

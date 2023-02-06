@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link rel="icon" href="/images/logo.jpg">
+    <link href="/css/bootstrap.min.css"
+          rel="stylesheet"
+          crossorigin="anonymous">
+    <link href="/css/app.css"
+          rel="stylesheet"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="/images/logo.jpg" class="rounded app-img-cls" alt="Cinque Terre">Registration
+            and Login System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="col-md-4" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/clients}">Clients</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/users}">Users</a>
+                </li>
+            </ul>
+        </div>
+        <div class="offset-md-3"></div>
+        <div class="col-md-3" id="navbarSupportedContentLogout">
+            <div class="row navbar-brand">
+                <div class="col-md-6">
+                    Welcome, <span th:text="${#authentication.getPrincipal().getFirstName()}"></span> <span
+                        th:text="${#authentication.getPrincipal().getLastName()}"></span>
+                </div>
+                <div class="col-md-3">
+                    <a class="no-a-cls" aria-current="page" th:href="@{/logout}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div th:if="${param.success}">
+        <div class="alert alert-success">You've successfully updated
+            in our app!
+        </div>
+    </div>
+    <div th:if="${param.error}">
+        <div class="alert alert-danger" th:text="${param.error}">
+        </div>
+    </div>
+    <div class="row">
+        <h1> Client Information </h1>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Client Details</div>
+                <div class="card-body">
+                    <form method="post" role="form" th:action="@{/client/update}" th:object="${client}">
+                        <!-- Form Group (username)-->
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="name">Name of Company</label>
+                                <input class="form-control"
+                                       id="name"
+                                       name="name"
+                                       placeholder="Enter Company Name"
+                                       th:field="*{name}"
+                                       type="text"
+                                />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1">Company identity validation o Company contact (name, email,
+                                    phone#, etc.)</label>
+                                <input class="form-control"
+                                       id="info"
+                                       name="info"
+                                       placeholder="Enter Company Info"
+                                       th:field="*{info}"
+                                       type="text"
+                                />
+                            </div>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="form-label">Name of Application</label>
+                                <input class="form-control"
+                                       id="appName"
+                                       name="appName"
+                                       placeholder="Enter Name of Application"
+                                       th:field="*{appName}"
+                                ></input>
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="form-label">Description of application and why they want access</label>
+                                <input class="form-control"
+                                       id="appDesc"
+                                       name="appDesc"
+                                       placeholder="Enter city"
+                                       th:field="*{appDesc}"
+                                       type="text"
+                                />
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (organization name)-->
+                            <div class="col-md-6">
+                                <label class="form-label">Description of user authentication</label>
+                                <input class="form-control"
+                                       id="userAuthDesc"
+                                       name="userAuthDesc"
+                                       placeholder="Enter Description of user authentication"
+                                       th:field="*{userAuthDesc}"
+                                       type="text"
+                                />
+                            </div>
+                            <!-- Form Group (location)-->
+                            <div class="col-md-6">
+                                <label class="form-label">Description of data handling/security/privacy</label>
+                                <input class="form-control"
+                                       id="dataDesc"
+                                       name="dataDesc"
+                                       placeholder="Enter Description of data"
+                                       th:field="*{dataDesc}"
+                                       type="text"
+                                />
+                            </div>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="form-label">Technical contact for testing their application with our FHIR
+                                    API</label>
+                                <input class="form-control"
+                                       id="appContact"
+                                       name="appContact"
+                                       placeholder="Enter Technical contact for testing"
+                                       th:field="*{appContact}"
+                                       type="text"
+                                />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Web link to application in a test environment</label>
+                                <input class="form-control"
+                                       id="appLink"
+                                       name="appLink"
+                                       placeholder="Enter Web link to application"
+                                       th:field="*{appLink}"
+                                       type="text"
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <input name="id" type="hidden" th:field="*{id}">
+                            <input name="status" type="hidden" th:field="*{status}">
+                            <button class="btn btn-primary" type="submit"><span th:text="${client.btnName}"></span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

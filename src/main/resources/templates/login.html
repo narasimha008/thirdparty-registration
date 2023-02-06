@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div th:if="${param.error}">
-                <div class="alert alert-danger">Invalid UserName or Password or SSN.</div>
+                <div class="alert alert-danger">Invalid UserName or Password.</div>
             </div>
             <div th:if="${param.logout}">
                 <div class="alert alert-success">You have been logged out.</div>
@@ -63,21 +63,12 @@
                                    placeholder="Password"
                             />
                         </div>
-
-                        <div class="mb-3">
-                            <label for="password" class="control-label">SSN *</label>
-                            <input type="text"
-                                   id="ssn"
-                                   name="ssn"
-                                   class="form-control"
-                                   placeholder="ssn"
-                            />
-                        </div>
-
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary">Login</button>
                             <span> Not registered?
-                            <a th:href="@{/register}"> Register/SignUp Here</a>
+                            <a th:href="@{/register}"> Register/SignUp</a>
+                        </span>&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;<span>
+                            <a th:href="@{/client-register}"> Client Register</a>
                         </span>
                         </div>
                     </form>
